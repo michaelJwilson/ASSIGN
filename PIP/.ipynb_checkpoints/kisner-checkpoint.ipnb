@@ -1,0 +1,298 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy              as     np\n",
+    "import  os, sys, subprocess"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from mpi4py               import MPI"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "##  from bitarray         import bitarray"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "FileNotFoundError",
+     "evalue": "[Errno 2] No such file or directory: 'module': 'module'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mFileNotFoundError\u001b[0m                         Traceback (most recent call last)",
+      "\u001b[0;32m<ipython-input-7-b7f40d742da2>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[1;32m      1\u001b[0m \u001b[0mcmd\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0;34m'module swap fiberassign/1.0.0'\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m----> 2\u001b[0;31m \u001b[0merr\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0msubprocess\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mcall\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mcmd\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0msplit\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+      "\u001b[0;32m/global/common/software/desi/cori/desiconda/20180709-1.2.6-spec/conda/lib/python3.6/subprocess.py\u001b[0m in \u001b[0;36mcall\u001b[0;34m(timeout, *popenargs, **kwargs)\u001b[0m\n\u001b[1;32m    265\u001b[0m     \u001b[0mretcode\u001b[0m \u001b[0;34m=\u001b[0m \u001b[0mcall\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m[\u001b[0m\u001b[0;34m\"ls\"\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m\"-l\"\u001b[0m\u001b[0;34m]\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    266\u001b[0m     \"\"\"\n\u001b[0;32m--> 267\u001b[0;31m     \u001b[0;32mwith\u001b[0m \u001b[0mPopen\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0;34m*\u001b[0m\u001b[0mpopenargs\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0;34m**\u001b[0m\u001b[0mkwargs\u001b[0m\u001b[0;34m)\u001b[0m \u001b[0;32mas\u001b[0m \u001b[0mp\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m    268\u001b[0m         \u001b[0;32mtry\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    269\u001b[0m             \u001b[0;32mreturn\u001b[0m \u001b[0mp\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mwait\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mtimeout\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0mtimeout\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/global/common/software/desi/cori/desiconda/20180709-1.2.6-spec/conda/lib/python3.6/subprocess.py\u001b[0m in \u001b[0;36m__init__\u001b[0;34m(self, args, bufsize, executable, stdin, stdout, stderr, preexec_fn, close_fds, shell, cwd, env, universal_newlines, startupinfo, creationflags, restore_signals, start_new_session, pass_fds, encoding, errors)\u001b[0m\n\u001b[1;32m    707\u001b[0m                                 \u001b[0mc2pread\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0mc2pwrite\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    708\u001b[0m                                 \u001b[0merrread\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0merrwrite\u001b[0m\u001b[0;34m,\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m--> 709\u001b[0;31m                                 restore_signals, start_new_session)\n\u001b[0m\u001b[1;32m    710\u001b[0m         \u001b[0;32mexcept\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m    711\u001b[0m             \u001b[0;31m# Cleanup if the child failed starting.\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;32m/global/common/software/desi/cori/desiconda/20180709-1.2.6-spec/conda/lib/python3.6/subprocess.py\u001b[0m in \u001b[0;36m_execute_child\u001b[0;34m(self, args, executable, preexec_fn, close_fds, pass_fds, cwd, env, startupinfo, creationflags, shell, p2cread, p2cwrite, c2pread, c2pwrite, errread, errwrite, restore_signals, start_new_session)\u001b[0m\n\u001b[1;32m   1342\u001b[0m                         \u001b[0;32mif\u001b[0m \u001b[0merrno_num\u001b[0m \u001b[0;34m==\u001b[0m \u001b[0merrno\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mENOENT\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1343\u001b[0m                             \u001b[0merr_msg\u001b[0m \u001b[0;34m+=\u001b[0m \u001b[0;34m': '\u001b[0m \u001b[0;34m+\u001b[0m \u001b[0mrepr\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0merr_filename\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0;32m-> 1344\u001b[0;31m                     \u001b[0;32mraise\u001b[0m \u001b[0mchild_exception_type\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0merrno_num\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0merr_msg\u001b[0m\u001b[0;34m,\u001b[0m \u001b[0merr_filename\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m\u001b[1;32m   1345\u001b[0m                 \u001b[0;32mraise\u001b[0m \u001b[0mchild_exception_type\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0merr_msg\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[1;32m   1346\u001b[0m \u001b[0;34m\u001b[0m\u001b[0m\n",
+      "\u001b[0;31mFileNotFoundError\u001b[0m: [Errno 2] No such file or directory: 'module': 'module'"
+     ]
+    }
+   ],
+   "source": [
+    "cmd = 'module swap fiberassign/1.0.0'\n",
+    "err =  subprocess.call(cmd.split())"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "ModuleNotFoundError",
+     "evalue": "No module named 'fiberassign.hardware'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mModuleNotFoundError\u001b[0m                       Traceback (most recent call last)",
+      "\u001b[0;32m<ipython-input-3-ef79efa9580a>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0;32mfrom\u001b[0m \u001b[0mfiberassign\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0mhardware\u001b[0m \u001b[0;32mimport\u001b[0m \u001b[0mload_hardware\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+      "\u001b[0;31mModuleNotFoundError\u001b[0m: No module named 'fiberassign.hardware'"
+     ]
+    }
+   ],
+   "source": [
+    "from fiberassign.hardware import load_hardware"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from fiberassign.tiles    import load_tiles\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from fiberassign.targets  import (TARGET_TYPE_SCIENCE,\n",
+    "                                  TARGET_TYPE_SKY, \n",
+    "                                  TARGET_TYPE_STANDARD,\n",
+    "                                  Targets,\n",
+    "                                  TargetsAvailable,\n",
+    "                                  TargetTree,\n",
+    "                                  FibersAvailable,\n",
+    "                                  load_target_file) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "ModuleNotFoundError",
+     "evalue": "No module named 'fiberassign.assign'",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m",
+      "\u001b[0;31mModuleNotFoundError\u001b[0m                       Traceback (most recent call last)",
+      "\u001b[0;32m<ipython-input-1-eee3fe1be230>\u001b[0m in \u001b[0;36m<module>\u001b[0;34m()\u001b[0m\n\u001b[0;32m----> 1\u001b[0;31m \u001b[0;32mfrom\u001b[0m \u001b[0mfiberassign\u001b[0m\u001b[0;34m.\u001b[0m\u001b[0massign\u001b[0m   \u001b[0;32mimport\u001b[0m  \u001b[0mAssignment\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n\u001b[0m",
+      "\u001b[0;31mModuleNotFoundError\u001b[0m: No module named 'fiberassign.assign'"
+     ]
+    }
+   ],
+   "source": [
+    "from fiberassign.assign   import  Assignment"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Read hardward properties;  See run_assign_init of https://github.com/desihub/fiberassign/blob/master/py/fiberassign/scripts/assign.py\n",
+    "hw            = load_hardware()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Read the nominal footprint\n",
+    "nominal_tiles = load_tiles(hw)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Target files.  Get these from command line arguments, etc.\n",
+    "target_files  = ['mtl.fits', 'sky.fits', 'standards-dark.fits']"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Realizations to do -- read these from a file or some other source. \n",
+    "realizations  = np.arange(1000, dtype=np.int32)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# How many MPI processes do we have and what is our rank?\n",
+    "mpi_procs     = MPI.COMM_WORLD.size\n",
+    "mpi_rank      = MPI.COMM_WORLD.rank"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Load Target data.  There may be some contention from all MPI processes \n",
+    "# reading at once, but this is only done once at the start of the job. \n",
+    "tgs           = Targets()\n",
+    " \n",
+    "for tgfile in target_files:\n",
+    "    load_target_file(tgs, tgfile)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "#  Create a hierarchical triangle mesh lookup of the targets positions.\n",
+    "tree              = TargetTree(tgs) "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# What iterations should this MPI rank compute? \n",
+    "rank_realizations = np.array_split(realizations, mpi_procs)[mpi_rank]"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Initialize the bitarray per target for our local realizations.\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Every MPI rank works on its own realizations. We run this job with one MPI rank per node \n",
+    "# and then use OpenMP and multiprocessing within a node. \n",
+    "for realization in rank_realizations:\n",
+    "     # Based on this realization index, set up numpy random seeds, etc. \n",
+    "     # If we are dithering our tile RA/DEC, compute that here. \n",
+    "     ##  tiles = dither_tiles(nominal tiles, seed)\n",
+    "     \n",
+    "     # Compute the targets available to each fiber for each tile. \n",
+    "     tgsavail  = TargetsAvailable(tgs, tiles, tree)\n",
+    "    \n",
+    "     # Compute the fibers on all tiles available for each target. \n",
+    "     favail    = FibersAvailable(tgsavail)\n",
+    "    \n",
+    "     # Create assignment object.\n",
+    "     asgn      = Assignment(tgs, tgsavail, favail)\n",
+    "    \n",
+    "     # First-pass assignment of science targets. \n",
+    "     asgn.assign_unused(TARGET_TYPE_SCIENCE)\n",
+    "    \n",
+    "     # Redistribute science targets across available petals.\n",
+    "     asgn.redistribute_science()\n",
+    "    \n",
+    "     # Assign standards, 10 per petal. \n",
+    "     asgn.assign_unused(TARGET_TYPE_STANDARD, 10)\n",
+    "     asgn.assign_force(TARGET_TYPE_STANDARD, 10)\n",
+    "        \n",
+    "     # Assign sky, up to 40 per petal. \n",
+    "     asgn.assign_unused(TARGET_TYPE_SKY, 40)\n",
+    "     asgn.assign_force(TARGET_TYPE_SKY, 40)\n",
+    "    \n",
+    "     # If there are any unassigned fibers, try to place them somewhere. \n",
+    "     asgn.assign_unused(TARGET_TYPE_SCIENCE)\n",
+    "     asgn.assign_unused(TARGET_TYPE_SKY)\n",
+    "        \n",
+    "     # Loop over assigned tiles and update our bit array for this realization. \n",
+    "    \n",
+    "#  Gather bit arrays from all precsess to rank zero and write them out.  "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "DESI 18.12",
+   "language": "python",
+   "name": "desi-18.12"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.6.6"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
